@@ -1,0 +1,84 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  general-purpose-functions
+
+  Sample SAM Template for general-purpose-functions
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  GPFunction01:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: gpf-01/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Policies:
+        # - KMSDecryptPolicy:
+        #     KeyId: slackAppToken
+      Environment:
+        Variables:
+          kmsEncryptedToken: <enter value here>
+  GPFunction02:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: gpf-02/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction03:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-03/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction04:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-04/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction05:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-05/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  GPFunction01:
+    Description: "GPFunction01 Lambda Function ARN"
+    Value: !GetAtt GPFunction01.Arn
+  GPFunction01IamRole:
+    Description: "Implicit IAM Role created for GPFunction01"
+    Value: !GetAtt GPFunction01Role.Arn
+  GPFunction02:
+    Description: "GPFunction02 Lambda Function ARN"
+    Value: !GetAtt GPFunction02.Arn
+  GPFunction02IamRole:
+    Description: "Implicit IAM Role created for GPFunction02"
+    Value: !GetAtt GPFunction02Role.Arn
+  GPFunction03:
+    Description: "GPFunction03 Lambda Function ARN"
+    Value: !GetAtt GPFunction03.Arn
+  GPFunction03IamRole:
+    Description: "Implicit IAM Role created for GPFunction03"
+    Value: !GetAtt GPFunction03Role.Arn
+  GPFunction04:
+    Description: "GPFunction04 Lambda Function ARN"
+    Value: !GetAtt GPFunction04.Arn
+  GPFunction04IamRole:
+    Description: "Implicit IAM Role created for GPFunction04"
+    Value: !GetAtt GPFunction04Role.Arn
+  GPFunction05:
+    Description: "GPFunction05 Lambda Function ARN"
+    Value: !GetAtt GPFunction05.Arn
+  GPFunction05IamRole:
+    Description: "Implicit IAM Role created for GPFunction05"
+    Value: !GetAtt GPFunction05Role.Arn

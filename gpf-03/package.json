@@ -1,0 +1,16 @@
+{
+  "name": "gpf-03",
+  "version": "1.0.0",
+  "description": "General purpose lambda function for NodeJS",
+  "main": "app.js",
+  "author": "Ross Ragsdale",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "test": "mocha tests/unit/"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}
