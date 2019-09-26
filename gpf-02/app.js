@@ -124,7 +124,15 @@ exports.lambdaHandler = async (event, context) => {
             	}
             ]
         }
-        
+
+        if (recipients.length === 0) {
+            let text = `Oops, looks like that project doesnt have any recipients assigned.`;
+            body = {
+            "response_type": "ephemeral",
+            "replace_original": false,
+            "text": text
+            }
+        }
         
     } catch(err) {
         spaces = await axios.get(`/rest/api/space`, options)
@@ -143,15 +151,6 @@ exports.lambdaHandler = async (event, context) => {
           "blocks": blocks
         }
         
-    }
-    
-    if (recipients.length === 0) {
-        let text = `Oops, looks like that project doesnt have any recipients assigned.`;
-        body = {
-          "response_type": "ephemeral",
-          "replace_original": false,
-          "text": text
-        }
     }
     
     
