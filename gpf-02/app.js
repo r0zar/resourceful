@@ -139,11 +139,17 @@ exports.lambdaHandler = async (event, context) => {
         spaceList = spaces['data']['results'].map(space => {
             return {key: space.key, name: space.name}
         })
-        let text = `Hmmm, I couldnt find the *${event.text}* space key in confluence. Try one of the following:`;
         let blocks = spaceList.map(space => {
             return {type: "section", "text": {"type": "mrkdwn", "text": `*${space.key}* :corn: \_${space.name}\_`}}
         })
-        blocks.unshift({type: "section", "text": {"type": "mrkdwn", "text": `:thinking_face:... ${text}`}})
+        let text;
+        if (event.text) {
+            text = `Hmmm, I couldnt find the *${event.text}* space key in confluence. Try one of the following:`;
+            blocks.unshift({type: "section", "text": {"type": "mrkdwn", "text": `:thinking_face:... ${text}`}})
+        } else {
+            text = 'Select a project to get started: `/report <SPACE_KEY>`'
+            blocks.unshift({type: "section", "text": {"type": "mrkdwn", "text": `${text}`}})
+        }
         body = {
           "response_type": "ephemeral",
           "replace_original": false,
