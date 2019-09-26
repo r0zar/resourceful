@@ -29,8 +29,10 @@ exports.lambdaHandler = async (event, context) => {
     };
     
     let recipients;
+    
+    let spacePromise = axios.get(`/rest/api/space/${event.text}`, options)
 
-    let data = await axios.get(`/rest/api/space/${event.text}/content?expand=body.view`, options)
+    let dataPromise = axios.get(`/rest/api/space/${event.text}/content?expand=body.view`, options)
         .then((response) => {
             let allPages = response.data.page.results.map(page => page.body.view.value).join('')
             let html = HTMLParser.parse(allPages, {
@@ -68,58 +70,83 @@ exports.lambdaHandler = async (event, context) => {
 
         })
         .catch(error => error)
-
-    let text = htmlToText.fromString(data, {singleNewLineParagraphs: true})
+        
+    let space, data, spaces, spaceList, body
+    try {
+        [space, data] = await Promise.all([spacePromise, dataPromise]);
+        
+        let text = htmlToText.fromString(data, {singleNewLineParagraphs: true})
     
-    data = `<div>Hello all,</div>
+        data = `<div>Hello all,</div>
 <br />
 <p>Information shown below is achievements of last week, with next steps being for week starting on September 3rd. If you would like to see all work happening in our team, please check out our <a href="https://digitial-product-engineering.atlassian.net/wiki/spaces/${event.text}/overview">dashboard here</a>.</p><br />` + data + `<br /><p>If you feel that I missed someone on this email or have questions, please reach out to me.</p>
 <br />
 <div>Cheers,</div>
 <div>Brandon</div>`;
-
-    const body = {
-        "response_type": "in_channel",
-        "text": event.text,
-        attachments: [
-        	{
-        		"color": "#2eb886",
-        		"title": text.split("Achievements")[0].replace("\n", ": "),
-                "fields": [
-                    {
-                        "title": "Details",
-                        "value": "Achievements\n" + text.split("Achievements")[1],
-                        "short": false
-                    }
-                ],
-        		"ts": Date.now() / 1000
-        	},
-        	{
-        		"color": "#d9d9d9",
-        		"text": data
-        	}
-    	],
-        "blocks": [
-        	{
-        		"type": "section",
-        		"text": {
-        			"type": "mrkdwn",
-        			"text": `Do you want to email this report to: ${recipients}?`
-        		},
-        		"accessory": {
-        			"type": "button",
-        			"text": {
-        				"type": "plain_text",
-        				"text": "Confirm",
-        				"emoji": true
-        			},
-        			"value": "confirm"
-        		}
-        	}
-        ]
+    
+        body = {
+            "response_type": "in_channel",
+            "text": space['data']['name'],
+            attachments: [
+            	{
+            		"color": "#2eb886",
+            		"title": text.split("Achievements")[0].replace("\n", ": "),
+                    "fields": [
+                        {
+                            "title": "Details",
+                            "value": "Achievements\n" + text.split("Achievements")[1],
+                            "short": false
+                        }
+                    ],
+            		"ts": Date.now() / 1000
+            	},
+            	{
+            		"color": "#d9d9d9",
+            		"text": data
+            	}
+        	],
+            "blocks": [
+            	{
+            		"type": "section",
+            		"text": {
+            			"type": "mrkdwn",
+            			"text": `Do you want to email this \_${space['data']['name']}\_ report to: ${recipients}?`
+            		},
+            		"accessory": {
+            			"type": "button",
+            			"text": {
+            				"type": "plain_text",
+            				"text": "Confirm",
+            				"emoji": true
+            			},
+            			"value": "confirm"
+            		}
+            	}
+            ]
+        }
+        
+        
+    } catch(err) {
+        spaces = await axios.get(`/rest/api/space`, options)
+        spaceList = spaces['data']['results'].map(space => {
+            return {key: space.key, name: space.name}
+        })
+        let text = `Hmmm, I couldnt find the *${event.text}* space key in confluence. Try one of the following:`;
+        let blocks = spaceList.map(space => {
+            return {type: "section", "text": {"type": "mrkdwn", "text": `*${space.key}* :corn: \_${space.name}\_`}}
+        })
+        blocks.unshift({type: "section", "text": {"type": "mrkdwn", "text": `:thinking_face:... ${text}`}})
+        body = {
+          "response_type": "ephemeral",
+          "replace_original": false,
+          "text": text,
+          "blocks": blocks
+        }
+        
     }
-
+    
+    
     return await axios.post(event.response_url, body)
       .then(response => response.status)
-    
+      
 };

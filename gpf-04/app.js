@@ -14,9 +14,8 @@ const nodeoutlook = require('nodejs-nodemailer-outlook');
  * 
  */
 exports.lambdaHandler = (event, context) => {
-    console.log(event.payload.response_url);
 
-    let spaceKey = event.payload.message.text
+    let spaceName = event.payload.message.text
     let content = event.payload.message.attachments[1].text
     content = content.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&')
     let recipients = event.payload.message.blocks[0].text.text.split(',')
@@ -26,15 +25,12 @@ exports.lambdaHandler = (event, context) => {
         "replace_original": "true",
         "text": "Email report sent successfully!"
     }
-
-    console.log(recipients)
     
     nodeoutlook.sendEmail({
-        auth: {user: "s993076@syngenta.org", pass: process.env.O365_PW},
-        // sender: "Brandon.Dohman@syngenta.com",
+        auth: {user: "h995818@syngenta.org", pass: process.env.O365_PW},
         replyTo: "Brandon.Dohman@syngenta.com",
         to: recipients,
-        subject: `NA DPE Weekly Status Report - ${spaceKey}`,
+        subject: `NA DPE Weekly Status Report - ${spaceName}`,
         html: content,
         attachments: [],
         onError: (e) => console.log(e),
