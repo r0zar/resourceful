@@ -145,6 +145,15 @@ exports.lambdaHandler = async (event, context) => {
         
     }
     
+    if (recipients.length === 0) {
+        let text = `Oops, looks like that project doesnt have any recipients assigned.`;
+        body = {
+          "response_type": "ephemeral",
+          "replace_original": false,
+          "text": text
+        }
+    }
+    
     
     return await axios.post(event.response_url, body)
       .then(response => response.status)
