@@ -135,7 +135,9 @@ exports.lambdaHandler = async (event, context) => {
         }
         
     } catch(err) {
-        spaces = await axios.get(`/rest/api/space`, options)
+        // Get Spaces documentation
+        // https://developer.atlassian.com/cloud/confluence/rest/?_ga=2.147616242.455311348.1569531521-2116423718.1569531521#api-space-get
+        spaces = await axios.get(`/rest/api/space?limit=49`, options)
         spaceList = spaces['data']['results'].map(space => {
             return {key: space.key, name: space.name}
         })
