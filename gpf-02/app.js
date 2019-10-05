@@ -33,66 +33,61 @@ exports.lambdaHandler = async (event, context) => {
     let recipients;
     
     let spacePromise = axios.get(`/rest/api/space/${event.text}`, options)
+        .catch(error => {
+            errorDetected = error;
+        });
 
     let dataPromise = axios.get(`/rest/api/space/${event.text}/content?expand=body.view`, options)
         .then((response) => {
-            let allPages = response.data.page.results.map(page => page.body.view.value).join('')
+            let allPages = response.data.page.results.map(page => page.body.view.value).join('');
             let html = HTMLParser.parse(allPages, {
                 singleNewLineParagraphs: true,
                 tables: true
-            })
+            });
 
             recipients = html.querySelectorAll("table")
-                .filter(h => h.outerHTML.includes("Reporting"))
+                .filter(h => h.outerHTML.includes("Reporting"));
                 
             recipients = recipients[recipients.length - 1]
-                .lastChild.lastChild.lastChild.text.split(';')
+                .lastChild.lastChild.lastChild.text.split(';');
             
             recipients = recipients
-                .map(r => ` <mailto:${r.split('<')[1].split('>')[0]}|${r.split(' <')[0]}>`)
-                
-            // if (recipients[0].includes('<')) {
-            //     console.log
-            // }
-                
+                .map(r => ` <mailto:${r.split('<')[1].split('>')[0]}|${r.split(' <')[0]}>`);
 
             html.querySelectorAll('span')
                 .filter(h => h.outerHTML.includes("ON TRACK"))
-                .forEach(h => h.rawAttrs += ' style="color: green;"')
+                .forEach(h => h.rawAttrs += ' style="color: green;"');
 
             html.querySelectorAll('span')
                 .filter(h => h.outerHTML.includes("DEPLOYED"))
-                .forEach(h => h.rawAttrs += ' style="color: purple;"')
+                .forEach(h => h.rawAttrs += ' style="color: purple;"');
 
             html.querySelectorAll('tbody')
-                .forEach(h => h.rawAttrs += ' style="vertical-align: top;"')
+                .forEach(h => h.rawAttrs += ' style="vertical-align: top;"');
 
             html.querySelectorAll('th')
-                .forEach(h => h.rawAttrs += ' style="background: whitesmoke; padding: 0.4rem 0;"')
+                .forEach(h => h.rawAttrs += ' style="background: whitesmoke; padding: 0.4rem 0;"');
 
             html.querySelectorAll('td')
-                .forEach(h => h.rawAttrs += ' style="padding-left: 24px;"')
+                .forEach(h => h.rawAttrs += ' style="padding-left: 24px;"');
 
             return html.querySelectorAll("table")
                 .filter(h => h.outerHTML.includes("Overall Status") || h.outerHTML.includes("Achievements"))
                 .map(h => h.outerHTML)
-                .join('')
+                .join('');
 
         })
         .catch(error => {
-            errorDetected = error; 
-            return axios.post(event.response_url, {
-              "response_type": "ephemeral",
-              "replace_original": false,
-              "text": `Oops, there was an issue parsing either the recipient list or the confluence page.`
-            })
-            .then(response => response.status)
-        })
-    let space, data, spaces, spaceList, body, text
-    try {
-        [space, data] = await Promise.all([spacePromise, dataPromise]);
+            errorDetected = error;
+        });
         
-        text = htmlToText.fromString(data, {singleNewLineParagraphs: true})
+    let space, data, body, text;
+
+    [space, data] = await Promise.all([spacePromise, dataPromise]);
+    
+    if (!errorDetected) {
+    
+        text = htmlToText.fromString(data, {singleNewLineParagraphs: true});
     
         data = `<div>Hello all,</div>
 <br />
@@ -102,11 +97,11 @@ exports.lambdaHandler = async (event, context) => {
 <br />
 <div>Cheers,</div>
 <div>Brandon</div>`;
-
-            
-        let title = text.split("Achievements")[0].replace("\n", ": ")
-        let achievements = text.split("Achievements")[1]
-
+    
+        let title = text.split("Achievements")[0].replace("\n", ": ");
+        
+        let achievements = text.split("Achievements")[1];
+    
         body = {
             "response_type": "in_channel",
             "text": space['data']['name'],
@@ -161,7 +156,7 @@ exports.lambdaHandler = async (event, context) => {
         			]
         		}
             ]
-        }
+        };
     
         if (recipients.length === 0) {
             text = `Oops, looks like that project doesnt have any recipients assigned.`;
@@ -169,39 +164,13 @@ exports.lambdaHandler = async (event, context) => {
               "response_type": "ephemeral",
               "replace_original": false,
               "text": text
-            }
+            };
         }
         
+        return await axios.post(event.response_url, body).then(response => response.status);
         
-    } catch(err) {
-        spaces = await axios.get(`/rest/api/space?limit=49`, options)
-        spaceList = spaces['data']['results'].map(space => {
-            return {key: space.key, name: space.name}
-        })
-        let blocks = spaceList.map(space => {
-            return {type: "section", "text": {"type": "mrkdwn", "text": `*${space.key}* :corn: \_${space.name}\_`}}
-        })
-        if (event.text) {
-            text = `Hmmm, I couldnt find the *${event.text}* space key in confluence. Try one of the following:`;
-            blocks.unshift({type: "section", "text": {"type": "mrkdwn", "text": `:thinking_face:... ${text}`}})
-        } else {
-            text = 'Select a project to get started: `/report <SPACE_KEY>`'
-            blocks.unshift({type: "section", "text": {"type": "mrkdwn", "text": `${text}`}})
-        }
-        body = {
-          "response_type": "ephemeral",
-          "replace_original": false,
-          "text": text,
-          "blocks": blocks
-        }
-        
-    }
-    
-    
-    if (!errorDetected) {
-        return await axios.post(event.response_url, body).then(response => response.status)
     } else {
-        throw errorDetected
+        return event;
     }
       
 };
