@@ -19,5 +19,5 @@ exports.lambdaHandler = async (event, context) => {
         "text": "Email report cancelled."
     }
     
-    await axios.post(event.response_url, body)
+    return await axios.post(event.response_url, body)
 };
