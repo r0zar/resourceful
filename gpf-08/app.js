@@ -14,11 +14,23 @@ const axios = require('axios');
  */
 exports.lambdaHandler = async (event, context) => {
 
-    const body = {
-        "replace_original": "true",
-        "text": "Email report cancelled."
-    };
+  let spaces = await axios.get(`/rest/api/space?limit=49`, options)
+  let spaceList = spaces['data']['results'].map(space => {
+      return {key: space.key, name: space.name}
+  })
+  let blocks = spaceList.map(space => {
+      return {type: "section", "text": {"type": "mrkdwn", "text": `*${space.key}* :corn: \_${space.name}\_`}}
+  })
+  body = {
+    "response_type": "ephemeral",
+    "replace_original": false,
+    "text": text,
+    "blocks": blocks
+  }
     
-    let response = await axios.post(event.response_url, body);
-    return response.status;
+  if (!errorDetected) {
+      return await axios.post(event.response_url, body).then(response => response.status)
+  } else {
+      throw errorDetected
+  }
 };
