@@ -15,6 +15,8 @@ const htmlToText = require('html-to-text');
  * 
  */
 exports.lambdaHandler = async (event, context) => {
+    
+    let errorDetected;
 
     const config = {
         username: "Ross.Ragsdale@syngenta.com",
@@ -42,9 +44,17 @@ exports.lambdaHandler = async (event, context) => {
 
             recipients = html.querySelectorAll("table")
                 .filter(h => h.outerHTML.includes("Reporting"))
+                
             recipients = recipients[recipients.length - 1]
-                .lastChild.lastChild.lastChild.text.split(',')
-                .map(r => ` <mailto:${r}|${r.split('@')[0]}>`)
+                .lastChild.lastChild.lastChild.text.split(';')
+            
+            recipients = recipients
+                .map(r => ` <mailto:${r.split('<')[1].split('>')[0]}|${r.split(' <')[0]}>`)
+                
+            // if (recipients[0].includes('<')) {
+            //     console.log
+            // }
+                
 
             html.querySelectorAll('span')
                 .filter(h => h.outerHTML.includes("ON TRACK"))
@@ -58,7 +68,7 @@ exports.lambdaHandler = async (event, context) => {
                 .forEach(h => h.rawAttrs += ' style="vertical-align: top;"')
 
             html.querySelectorAll('th')
-                .forEach(h => h.rawAttrs += ' style="background: whitesmoke;"')
+                .forEach(h => h.rawAttrs += ' style="background: whitesmoke; padding: 0.4rem 0;"')
 
             html.querySelectorAll('td')
                 .forEach(h => h.rawAttrs += ' style="padding-left: 24px;"')
@@ -69,32 +79,45 @@ exports.lambdaHandler = async (event, context) => {
                 .join('')
 
         })
-        .catch(error => error)
-        
-    let space, data, spaces, spaceList, body
+        .catch(error => {
+            errorDetected = error; 
+            return axios.post(event.response_url, {
+              "response_type": "ephemeral",
+              "replace_original": false,
+              "text": `Oops, there was an issue parsing either the recipient list or the confluence page.`
+            })
+            .then(response => response.status)
+        })
+    let space, data, spaces, spaceList, body, text
     try {
         [space, data] = await Promise.all([spacePromise, dataPromise]);
         
-        let text = htmlToText.fromString(data, {singleNewLineParagraphs: true})
+        text = htmlToText.fromString(data, {singleNewLineParagraphs: true})
     
         data = `<div>Hello all,</div>
 <br />
 <p>Information shown below is achievements of last week, with next steps being for week starting on September 3rd. If you would like to see all work happening in our team, please check out our <a href="https://digitial-product-engineering.atlassian.net/wiki/spaces/${event.text}/overview">dashboard here</a>.</p><br />` + data + `<br /><p>If you feel that I missed someone on this email or have questions, please reach out to me.</p>
 <br />
+<div>\*\* We've implemented an automated reporting service. If you received this in error or found a bug, please let me know.</div>
+<br />
 <div>Cheers,</div>
 <div>Brandon</div>`;
-    
+
+            
+        let title = text.split("Achievements")[0].replace("\n", ": ")
+        let achievements = text.split("Achievements")[1]
+
         body = {
             "response_type": "in_channel",
             "text": space['data']['name'],
             attachments: [
             	{
             		"color": "#2eb886",
-            		"title": text.split("Achievements")[0].replace("\n", ": "),
+            		"title": title,
                     "fields": [
                         {
                             "title": "Details",
-                            "value": "Achievements\n" + text.split("Achievements")[1],
+                            "value": "Achievements\n" + achievements,
                             "short": false
                         }
                     ],
@@ -111,32 +134,46 @@ exports.lambdaHandler = async (event, context) => {
             		"text": {
             			"type": "mrkdwn",
             			"text": `Do you want to email this \_${space['data']['name']}\_ report to: ${recipients}?`
-            		},
-            		"accessory": {
-            			"type": "button",
-            			"text": {
-            				"type": "plain_text",
-            				"text": "Confirm",
-            				"emoji": true
-            			},
-            			"value": "confirm"
             		}
-            	}
+            	},
+        		{
+        			"type": "actions",
+        			"elements": [
+        				{
+        					"type": "button",
+        					"text": {
+        						"type": "plain_text",
+        						"emoji": true,
+        						"text": "Confirm"
+        					},
+        					"style": "primary",
+        					"value": "confirm"
+        				},
+        				{
+        					"type": "button",
+        					"text": {
+        						"type": "plain_text",
+        						"emoji": true,
+        						"text": "Cancel"
+        					},
+        					"value": "cancel"
+        				}
+        			]
+        		}
             ]
         }
-
+    
         if (recipients.length === 0) {
-            let text = `Oops, looks like that project doesnt have any recipients assigned.`;
+            text = `Oops, looks like that project doesnt have any recipients assigned.`;
             body = {
-            "response_type": "ephemeral",
-            "replace_original": false,
-            "text": text
+              "response_type": "ephemeral",
+              "replace_original": false,
+              "text": text
             }
         }
         
+        
     } catch(err) {
-        // Get Spaces documentation
-        // https://developer.atlassian.com/cloud/confluence/rest/?_ga=2.147616242.455311348.1569531521-2116423718.1569531521#api-space-get
         spaces = await axios.get(`/rest/api/space?limit=49`, options)
         spaceList = spaces['data']['results'].map(space => {
             return {key: space.key, name: space.name}
@@ -144,7 +181,6 @@ exports.lambdaHandler = async (event, context) => {
         let blocks = spaceList.map(space => {
             return {type: "section", "text": {"type": "mrkdwn", "text": `*${space.key}* :corn: \_${space.name}\_`}}
         })
-        let text;
         if (event.text) {
             text = `Hmmm, I couldnt find the *${event.text}* space key in confluence. Try one of the following:`;
             blocks.unshift({type: "section", "text": {"type": "mrkdwn", "text": `:thinking_face:... ${text}`}})
@@ -162,7 +198,10 @@ exports.lambdaHandler = async (event, context) => {
     }
     
     
-    return await axios.post(event.response_url, body)
-      .then(response => response.status)
+    if (!errorDetected) {
+        return await axios.post(event.response_url, body).then(response => response.status)
+    } else {
+        throw errorDetected
+    }
       
 };

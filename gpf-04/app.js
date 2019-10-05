@@ -15,10 +15,10 @@ const nodeoutlook = require('nodejs-nodemailer-outlook');
  */
 exports.lambdaHandler = (event, context) => {
 
-    let spaceName = event.payload.message.text
-    let content = event.payload.message.attachments[1].text
+    let spaceName = event.message.text
+    let content = event.message.attachments[1].text
     content = content.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&')
-    let recipients = event.payload.message.blocks[0].text.text.split(',')
+    let recipients = event.message.blocks[0].text.text.split(',')
     recipients = recipients.map(r => r.split("mailto:")[1].split("|")[0]).join(",")
 
     const body = {
@@ -34,6 +34,6 @@ exports.lambdaHandler = (event, context) => {
         html: content,
         attachments: [],
         onError: (e) => console.log(e),
-        onSuccess: async (i) => await axios.post(event.payload.response_url, body)
+        onSuccess: async (i) => await axios.post(event.response_url, body)
     });
 };
