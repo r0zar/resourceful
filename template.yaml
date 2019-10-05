@@ -53,6 +53,12 @@ Resources:
       CodeUri: gpf-06/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+  GPFunction07:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-07/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -94,3 +100,9 @@ Outputs:
   GPFunction06IamRole:
     Description: "Implicit IAM Role created for GPFunction06"
     Value: !GetAtt GPFunction06Role.Arn
+  GPFunction07:
+    Description: "GPFunction07 Lambda Function ARN"
+    Value: !GetAtt GPFunction07.Arn
+  GPFunction07IamRole:
+    Description: "Implicit IAM Role created for GPFunction07"
+    Value: !GetAtt GPFunction07Role.Arn
