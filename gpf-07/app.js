@@ -12,7 +12,7 @@ const aws = require('aws-sdk');
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  * 
  */
-exports.handler = async (event) => {
+exports.lambdaHandler = async (event) => {
     var stepfunctions = new aws.StepFunctions();
     let body = event['body'].split('+').join(' ');
     let payload = decodeURIComponent(body).split('payload=')[1];
