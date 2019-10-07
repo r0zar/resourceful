@@ -18,7 +18,7 @@ exports.lambdaHandler = async (event) => {
     let payload = decodeURIComponent(body).split('payload=')[1];
     console.log(payload);
     var params = {
-      stateMachineArn: 'arn:aws:states:us-east-2:990217436416:stateMachine:emailReport',
+      stateMachineArn: 'arn:aws:states:us-east-2:990217436416:stateMachine:report-interactivity',
       input: payload
     };
     let response = await new Promise((resolve, reject) => {

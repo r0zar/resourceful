@@ -142,7 +142,34 @@ exports.lambdaHandler = async (event, context) => {
         						"text": "Confirm"
         					},
         					"style": "primary",
-        					"value": "confirm"
+        					"value": "confirm",
+        					"confirm": {
+                              "title": {
+                                  "type": "plain_text",
+                                  "text": "Ready to send?"
+                              },
+                              "text": {
+                                  "type": "mrkdwn",
+                                  "text": `\_${space['data']['name']}\_ report is ready to be sent!`
+                              },
+                              "confirm": {
+                                  "type": "plain_text",
+                                  "text": "Ship it!"
+                              },
+                              "deny": {
+                                  "type": "plain_text",
+                                  "text": "Cancel"
+                              }
+                            }
+        				},
+        				{
+        					"type": "button",
+        					"text": {
+        						"type": "plain_text",
+        						"emoji": true,
+        						"text": "View HTML"
+        					},
+        					"value": "viewHtml"
         				},
         				{
         					"type": "button",
