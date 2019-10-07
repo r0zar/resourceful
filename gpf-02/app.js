@@ -162,15 +162,16 @@ exports.lambdaHandler = async (event, context) => {
                               }
                             }
         				},
-        				{
-        					"type": "button",
-        					"text": {
-        						"type": "plain_text",
-        						"emoji": true,
-        						"text": "View HTML"
-        					},
-        					"value": "viewHtml"
-        				},
+        				// {
+        				// 	"type": "button",
+        				// 	"text": {
+        				// 		"type": "plain_text",
+        				// 		"emoji": true,
+        				// 		"text": "View HTML"
+        				// 	},
+        				// 	"value": "viewHtml",
+                        //  "action_id": event.text
+        				// },
         				{
         					"type": "button",
         					"text": {

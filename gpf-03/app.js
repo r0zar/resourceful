@@ -29,29 +29,15 @@ exports.lambdaHandler = async (event, context) => {
         headers: {'Accept': 'application/json'}
     };
     
-    let recipients;
-    
-    let spacePromise = axios.get(`/rest/api/space/${event.text}`, options)
-        .catch(error => {
-            errorDetected = error;
-        });
+    let spaceKey = event.actions[0].action_id;
 
-    let dataPromise = axios.get(`/rest/api/space/${event.text}/content?expand=body.view`, options)
+    let dataPromise = axios.get(`/rest/api/space/${spaceKey}/content?expand=body.view`, options)
         .then((response) => {
             let allPages = response.data.page.results.map(page => page.body.view.value).join('');
             let html = HTMLParser.parse(allPages, {
                 singleNewLineParagraphs: true,
                 tables: true
             });
-
-            recipients = html.querySelectorAll("table")
-                .filter(h => h.outerHTML.includes("Reporting"));
-                
-            recipients = recipients[recipients.length - 1]
-                .lastChild.lastChild.lastChild.text.split(';');
-            
-            recipients = recipients
-                .map(r => ` <mailto:${r.split('<')[1].split('>')[0]}|${r.split(' <')[0]}>`);
 
             html.querySelectorAll('span')
                 .filter(h => h.outerHTML.includes("ON TRACK"))
@@ -80,9 +66,9 @@ exports.lambdaHandler = async (event, context) => {
             errorDetected = error;
         });
         
-    let space, data, body;
+    let data, body;
 
-    [space, data] = await Promise.all([spacePromise, dataPromise]);
+    [data] = await Promise.all([dataPromise]);
     
     if (!errorDetected) {
     
@@ -97,7 +83,8 @@ exports.lambdaHandler = async (event, context) => {
     
         body = {
             "response_type": "ephemeral",
-            "text": space['data']['name'],
+            "replace_original": false,
+            "text": "Confluence-generated HTML status report",
             attachments: [
             	{
             		"color": "#d9d9d9",
