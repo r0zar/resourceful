@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 /**
  *
  * Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
@@ -13,12 +11,7 @@ const axios = require('axios');
  * 
  */
 exports.lambdaHandler = async (event, context) => {
-
-    const body = {
-        "replace_original": "true",
-        "text": "Email report cancelled."
-    };
     
-    let response = await axios.post(event.response_url, body);
-    return response.status;
+    return await Promise.resolve(event);
+    
 };

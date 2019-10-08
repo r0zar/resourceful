@@ -1,5 +1,3 @@
-const slackApiToken = process.env.kmsEncryptedToken;
-
 /**
  *
  * Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
@@ -13,6 +11,7 @@ const slackApiToken = process.env.kmsEncryptedToken;
  * 
  */
 exports.lambdaHandler = async (event, context) => {
-    console.log("TOKENS MATCH?:", event.token == slackApiToken);
-    return event.token == slackApiToken ? event : Error("Bad Token");
+
+    return await Promise.resolve(event);
+    
 };
