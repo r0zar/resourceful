@@ -1,30 +1,34 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  general-purpose-functions
+  yourself - a minimalistic lambda starter template
 
-  Sample SAM Template for general-purpose-functions
+  Built for use with SAM CLI and AWS CLI.
   
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 5
 
+# More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 Resources:
+
+  # NodeJS general purpose functions
+
+  GPFunction00:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-00/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
   GPFunction01:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: gpf-01/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
-      Policies:
-        # - KMSDecryptPolicy:
-        #     KeyId: slackAppToken
-      Environment:
-        Variables:
-          kmsEncryptedToken: <enter value here>
   GPFunction02:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: gpf-02/
       Handler: app.lambdaHandler
@@ -45,8 +49,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: gpf-05/
-      Handler: app.lambda_handler
-      Runtime: python3.7
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
   GPFunction06:
     Type: AWS::Serverless::Function
     Properties:
@@ -65,11 +69,33 @@ Resources:
       CodeUri: gpf-08/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+  GPFunction09:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-09/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+
+  # Python general purpose functions
+
+  GPFPython00:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-py-00/
+      Handler: app.lambda_handler
+      Runtime: python3.7
 
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+
+  # Python general purpose functions IAM 
+
+  GPFunction00:
+    Description: "GPFunction00 Lambda Function ARN"
+    Value: !GetAtt GPFunction00.Arn
+  GPFunction00IamRole:
+    Description: "Implicit IAM Role created for GPFunction00"
+    Value: !GetAtt GPFunction00Role.Arn
   GPFunction01:
     Description: "GPFunction01 Lambda Function ARN"
     Value: !GetAtt GPFunction01.Arn
@@ -118,3 +144,18 @@ Outputs:
   GPFunction08IamRole:
     Description: "Implicit IAM Role created for GPFunction08"
     Value: !GetAtt GPFunction08Role.Arn
+  GPFunction09:
+    Description: "GPFunction09 Lambda Function ARN"
+    Value: !GetAtt GPFunction09.Arn
+  GPFunction09IamRole:
+    Description: "Implicit IAM Role created for GPFunction09"
+    Value: !GetAtt GPFunction09Role.Arn
+
+  # Python general purpose functions IAM
+
+  GPFPython00:
+    Description: "GPFPython00 Lambda Function ARN"
+    Value: !GetAtt GPFPython00.Arn
+  GPFPython00IamRole:
+    Description: "Implicit IAM Role created for GPFPython00"
+    Value: !GetAtt GPFPython00Role.Arn
