@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 /**
  *
  * Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
@@ -11,7 +13,45 @@
  * 
  */
 exports.lambdaHandler = async (event, context) => {
-
-    return await Promise.resolve(event);
     
+    console.log(JSON.stringify(event));
+    
+    let blocks = [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "A new user experiment was created:"
+			}
+		},
+		{
+			"type": "section",
+			"fields": [
+				{
+					"type": "mrkdwn",
+					"text": "*Type:*\nUser Experiment"
+				},
+				{
+					"type": "mrkdwn",
+					"text": `*When:*\n${new Date()}`
+				},
+				{
+					"type": "mrkdwn",
+					"text": `*Created By:*\n${event.user_name}`
+				},
+				{
+					"type": "mrkdwn",
+					"text": `*Assumption:*\n${event.text}`
+				}
+			]
+		}
+	]
+    
+    let body = {
+        "response_type": "in_channel",
+        "text": 'User test created!',
+        "blocks": blocks
+      };
+    
+    return await axios.post(event.response_url, body).then(response => response.status);
 };

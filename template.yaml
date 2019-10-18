@@ -76,24 +76,6 @@ Resources:
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
 
-  # Python general purpose functions
-
-  GPFPython00:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-py-00/
-      Handler: app.lambda_handler
-      Runtime: python3.7
-
-  # .NET general purpose functions
-
-  GPFdNet00:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./gpf-dn-00/
-      Handler: GPF::GPF.Function::FunctionHandler
-      Runtime: dotnetcore2.1
-
 Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
 
@@ -159,21 +141,3 @@ Outputs:
   GPFunction09IamRole:
     Description: "Implicit IAM Role created for GPFunction09"
     Value: !GetAtt GPFunction09Role.Arn
-
-  # Python general purpose functions IAM
-
-  GPFPython00:
-    Description: "GPFPython00 Lambda Function ARN"
-    Value: !GetAtt GPFPython00.Arn
-  GPFPython00IamRole:
-    Description: "Implicit IAM Role created for GPFPython00"
-    Value: !GetAtt GPFPython00Role.Arn
-
-  # .NET general purpose functions IAM
-
-  GPFdNet00:
-    Description: "GPFdNet00 Lambda Function ARN"
-    Value: !GetAtt GPFdNet00.Arn
-  GPFdNet00IamRole:
-    Description: "Implicit IAM Role created for GPFdNet00"
-    Value: !GetAtt GPFdNet00Role.Arn
