@@ -29,7 +29,7 @@ exports.lambdaHandler = async (event, context) => {
 			"fields": [
 				{
 					"type": "mrkdwn",
-					"text": "*Type:*\nUser Experiment"
+					"text": "*Type:*\nExperiment"
 				},
 				{
 					"type": "mrkdwn",
@@ -41,7 +41,7 @@ exports.lambdaHandler = async (event, context) => {
 				},
 				{
 					"type": "mrkdwn",
-					"text": `*Assumption:*\n${event.text}`
+					"text": `*Experiment by testing:*\n${event.text}`
 				}
 			]
 		}

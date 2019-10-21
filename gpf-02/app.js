@@ -19,7 +19,7 @@ exports.lambdaHandler = async (event, context) => {
   			"type": "section",
   			"text": {
   				"type": "mrkdwn",
-  				"text": "Should we test if users would like the option of a 'dark mode' in farmshots?"
+  				"text": `_${event.experiment.experimentsId}_\n\n*Should we test ${event.experiment.text}?*`
   			}
   		},
   		{
@@ -33,7 +33,7 @@ exports.lambdaHandler = async (event, context) => {
   						"text": "Downvote"
   					},
   					"style": "danger",
-  					"value": "click_me_123"
+  					"value": "downvote"
   				},
   				{
   					"type": "button",
@@ -42,7 +42,7 @@ exports.lambdaHandler = async (event, context) => {
   						"emoji": true,
   						"text": "Skip"
   					},
-  					"value": "click_me_123"
+  					"value": "skip"
   				},
   				{
   					"type": "button",
@@ -51,7 +51,7 @@ exports.lambdaHandler = async (event, context) => {
   						"emoji": true,
   						"text": "Cancel"
   					},
-  					"value": "click_me_123"
+  					"value": "cancel"
   				},
   				{
   					"type": "button",
@@ -61,7 +61,7 @@ exports.lambdaHandler = async (event, context) => {
   						"text": "Upvote"
   					},
   					"style": "primary",
-  					"value": "click_me_123"
+  					"value": "upvote"
   				}
   			]
   		}
@@ -69,10 +69,10 @@ exports.lambdaHandler = async (event, context) => {
     
     let body = {
         "response_type": "in_channel",
-        "text": 'User test created!',
+        "text": 'User test ready for ranking!',
         "blocks": blocks
       };
     
-    return await axios.post(event.response_url, body).then(response => response.status);
+    return await axios.post(event.event.response_url, body).then(response => response.status);
     
 };
