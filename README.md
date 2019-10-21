@@ -1,14 +1,6 @@
-# yourself
+# experiments-lab
 
-Yourself is the easiest way to get your code running on Lambdas in AWS.
-
-## Getting Started
-
-First, you'll need to go Fork `yourself` in the Gitlab UI.
-
-You'll also want to rename the project so that it easy to understand what it's purpose is.
-
-When your done that, ready through the overview and check out the setup process.
+It's kinda like a suggestion box, but better.
 
 ## Overview
 
