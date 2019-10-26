@@ -73,8 +73,8 @@ Resources:
       CodeUri: gpf-09/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
-    Policies:
-      - AWSStepFunctionsFullAccess
+      Policies:
+        - AWSStepFunctionsFullAccess
 
 Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
