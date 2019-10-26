@@ -39,12 +39,16 @@ Resources:
       CodeUri: gpf-03/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+      Policies:
+        - AWSStepFunctionsFullAccess
   GPFunction04:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: gpf-04/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+      Policies:
+        - AWSStepFunctionsFullAccess
   GPFunction05:
     Type: AWS::Serverless::Function
     Properties:
@@ -75,8 +79,6 @@ Resources:
       CodeUri: gpf-09/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
-      Policies:
-        - AWSStepFunctionsFullAccess
 
 Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
