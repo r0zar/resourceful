@@ -36,7 +36,7 @@ exports.lambdaHandler = async (event) => {
                 "placeholder": {
                     "type": "plain_text",
                     "emoji": true,
-                    "text": "Pick an topic for improvement..."
+                    "text": "Pick an area for improvement..."
                 },
                 "options": [
                     {
