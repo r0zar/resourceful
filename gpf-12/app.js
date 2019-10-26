@@ -16,8 +16,10 @@ exports.lambdaHandler = async (event, context) => {
 
 	const body = {
 		trigger_id: event.trigger_id,
+		response_action: "update",
 		view: {
 			"type": "modal",
+			"callback_id": "modal-2",
 			"title": {
 				"type": "plain_text",
 				"text": "New Experiment",

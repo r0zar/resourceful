@@ -18,6 +18,7 @@ exports.lambdaHandler = async (event, context) => {
 		trigger_id: event.trigger_id,
 		view: {
 			"type": "modal",
+			"callback_id": "modal-1",
 			"title": {
 				"type": "plain_text",
 				"text": "New Experiment",
