@@ -6,7 +6,6 @@
   "author": "Ross Ragsdale",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.556.0",
     "axios": "^0.19.0"
   },
   "scripts": {
