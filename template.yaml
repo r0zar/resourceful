@@ -73,11 +73,12 @@ Resources:
       CodeUri: gpf-09/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+    Policies:
+      # Give Step Functions Full Access to your Lambda Function
+      - StepFunctionsFullAccess
 
 Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-
-  # Python general purpose functions IAM
 
   GPFunction00:
     Description: "GPFunction00 Lambda Function ARN"

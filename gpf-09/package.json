@@ -5,7 +5,9 @@
   "main": "app.js",
   "author": "Ross Ragsdale",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.556.0"
+  },
   "scripts": {
     "test": "mocha tests/unit/"
   },
