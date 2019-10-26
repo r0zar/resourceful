@@ -79,6 +79,14 @@ Resources:
       CodeUri: gpf-09/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+      Policies:
+        - AWSStepFunctionsFullAccess
+  GPFunction10:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-10/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
 
 Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
@@ -143,3 +151,9 @@ Outputs:
   GPFunction09IamRole:
     Description: "Implicit IAM Role created for GPFunction09"
     Value: !GetAtt GPFunction09Role.Arn
+  GPFunction10:
+    Description: "GPFunction10 Lambda Function ARN"
+    Value: !GetAtt GPFunction10.Arn
+  GPFunction10IamRole:
+    Description: "Implicit IAM Role created for GPFunction10"
+    Value: !GetAtt GPFunction10Role.Arn
