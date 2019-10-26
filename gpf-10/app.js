@@ -290,7 +290,7 @@ exports.lambdaHandler = async (event) => {
     ]
 
     const responseBody = {
-        replace_original: true,
+        trigger_id: event.trigger_id,
         text: "Create a new experiment!",
         type: "modal",
         title: {
