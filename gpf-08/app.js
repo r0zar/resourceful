@@ -16,7 +16,7 @@ exports.lambdaHandler = async (event, context) => {
 
     const body = {
         replace_original: true,
-        text: "Done ranking experiments."
+        text: "Cancelled."
     };
     
     let response = await axios.post(event.response_url, body);
