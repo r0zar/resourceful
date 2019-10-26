@@ -34,6 +34,39 @@ exports.lambdaHandler = async (event, context) => {
 				"emoji": true
 			},
 			"blocks": [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*<fakeLink.toYourApp.com|Learning Metrics>*\nHow would you like to measure success?"
+            },
+            "accessory": {
+                "type": "static_select",
+                "placeholder": {
+                    "type": "plain_text",
+                    "emoji": true,
+                    "text": "Pick a metric of success..."
+                },
+                "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "% Completed"
+                        },
+                        "value": "value-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "KPI (success metric)"
+                        },
+                        "value": "value-1"
+                    }
+                ]
+            }
+        },
 				{
 					"type": "input",
 					"element": {
