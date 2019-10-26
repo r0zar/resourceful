@@ -19,6 +19,8 @@ Resources:
       CodeUri: gpf-00/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+      Policies:
+        - AWSStepFunctionsFullAccess
   GPFunction01:
     Type: AWS::Serverless::Function
     Properties:
