@@ -1,5 +1,5 @@
 {
-  "name": "gpf-09",
+  "name": "gpf",
   "version": "1.0.0",
   "description": "General purpose lambda function for NodeJS",
   "main": "app.js",
