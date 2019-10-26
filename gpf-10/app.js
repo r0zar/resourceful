@@ -77,7 +77,7 @@ exports.lambdaHandler = async (event) => {
                 "placeholder": {
                     "type": "plain_text",
                     "emoji": true,
-                    "text": "Manage"
+                    "text": "Select a practice..."
                 },
                 "options": [
                     {
@@ -189,7 +189,7 @@ exports.lambdaHandler = async (event) => {
                 "placeholder": {
                     "type": "plain_text",
                     "emoji": true,
-                    "text": "Select a practice..."
+                    "text": "How long will the experiment last?"
                 },
                 "options": [
                     {
