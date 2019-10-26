@@ -20,7 +20,7 @@ exports.lambdaHandler = async (event, context) => {
 			"type": "modal",
 			"title": {
 				"type": "plain_text",
-				"text": "My App",
+				"text": "New Experiment",
 				"emoji": true
 			},
 			"submit": {
