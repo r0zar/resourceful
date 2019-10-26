@@ -93,6 +93,12 @@ Resources:
       CodeUri: gpf-11/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+  GPFunction12:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-12/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
 
 Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api

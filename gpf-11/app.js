@@ -34,111 +34,69 @@ exports.lambdaHandler = async (event, context) => {
 				"emoji": true
 			},
 			"blocks": [
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*<fakeLink.toYourApp.com|Learning Metrics>*\nHow would you like to measure success?"
-            },
-            "accessory": {
-                "type": "static_select",
-                "placeholder": {
-                    "type": "plain_text",
-                    "emoji": true,
-                    "text": "Pick a metric of success..."
-                },
-                "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "emoji": true,
-                            "text": "% Completed"
-                        },
-                        "value": "value-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "emoji": true,
-                            "text": "KPI (success metric)"
-                        },
-                        "value": "value-1"
-                    }
-                ]
-            }
-        },
 				{
 					"type": "input",
 					"element": {
-						"type": "plain_text_input",
+						"type": "static_select",
 						"action_id": "title",
-						"placeholder": {
-							"type": "plain_text",
-							"text": "What do you want to ask of the world?"
-						}
+		                "placeholder": {
+		                    "type": "plain_text",
+		                    "emoji": true,
+		                    "text": "How would you like to measure success?"
+		                },
+		                "options": [
+		                    {
+		                        "text": {
+		                            "type": "plain_text",
+		                            "emoji": true,
+		                            "text": "% Completed"
+		                        },
+		                        "value": "metric-0"
+		                    },
+		                    {
+		                        "text": {
+		                            "type": "plain_text",
+		                            "emoji": true,
+		                            "text": "KPI (success metric)"
+		                        },
+		                        "value": "metric-1"
+		                    }
+		                ]
 					},
 					"label": {
 						"type": "plain_text",
-						"text": "Title"
-					}
-				},
-				{
-					"type": "input",
-					"element": {
-						"type": "multi_channels_select",
-						"action_id": "channels",
-						"placeholder": {
-							"type": "plain_text",
-							"text": "Where should the poll be sent?"
-						}
-					},
-					"label": {
-						"type": "plain_text",
-						"text": "Channel(s)"
-					}
-				},
-				{
-					"type": "input",
-					"element": {
-						"type": "plain_text_input",
-						"action_id": "option_1",
-						"placeholder": {
-							"type": "plain_text",
-							"text": "First option"
-						}
-					},
-					"label": {
-						"type": "plain_text",
-						"text": "Option 1"
+						"text": "Improvement criteria"
 					}
 				},
 				{
 					"type": "input",
 					"element": {
 						"type": "plain_text_input",
-						"action_id": "option_2",
+						"action_id": "goal-1",
 						"placeholder": {
 							"type": "plain_text",
-							"text": "How many options do they need, really?"
+							"text": "What KPI metric will be tracked for this experiment?"
 						}
 					},
 					"label": {
 						"type": "plain_text",
-						"text": "Option 2"
+						"text": "KPI metric under test"
 					}
 				},
 				{
-					"type": "actions",
-					"elements": [
-						{
-							"type": "button",
-							"action_id": "add_option",
-							"text": {
-								"type": "plain_text",
-								"text": "Add another option  "
-							}
+					"type": "input",
+					"element": {
+						"type": "plain_text_input",
+						"action_id": "goal-1",
+						"placeholder": {
+							"type": "plain_text",
+							"text": "What is a reasonable goal to target for that metric?"
 						}
-					]
+					},
+					"label": {
+						"type": "plain_text",
+						"text": "Target by end of experiment"
+					}
 				}
 			]
 		}
