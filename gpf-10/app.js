@@ -290,9 +290,25 @@ exports.lambdaHandler = async (event) => {
     ]
 
     const responseBody = {
-      replace_original: true,
-      text: "Create a new experiment!",
-      blocks: blocks
+        replace_original: true,
+        text: "Create a new experiment!",
+        type: "modal",
+        title: {
+            "type": "plain_text",
+            "text": "My App",
+            "emoji": true
+        },
+        submit: {
+            "type": "plain_text",
+            "text": "Submit",
+            "emoji": true
+        },
+        close: {
+            "type": "plain_text",
+            "text": "Cancel",
+            "emoji": true
+        },
+        blocks: blocks
     };
     
     let response = await axios.post(event.response_url, responseBody);
