@@ -74,8 +74,7 @@ Resources:
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
     Policies:
-      # Give Step Functions Full Access to your Lambda Function
-      - StepFunctionsFullAccess
+      - AWSStepFunctionsFullAccess
 
 Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
