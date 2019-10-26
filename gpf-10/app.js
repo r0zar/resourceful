@@ -36,7 +36,7 @@ exports.lambdaHandler = async (event) => {
                 "placeholder": {
                     "type": "plain_text",
                     "emoji": true,
-                    "text": "Manage"
+                    "text": "Pick an topic for improvement..."
                 },
                 "options": [
                     {
@@ -156,7 +156,7 @@ exports.lambdaHandler = async (event) => {
                         "text": {
                             "type": "plain_text",
                             "emoji": true,
-                            "text": "Use a _waterline_ to create guardrails around team and individual autonomy"
+                            "text": "Use a waterline to create guardrails around team and individual autonomy"
                         },
                         "value": "practice-10"
                     }
