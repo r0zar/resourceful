@@ -189,7 +189,7 @@ exports.lambdaHandler = async (event) => {
                 "placeholder": {
                     "type": "plain_text",
                     "emoji": true,
-                    "text": "How long will the experiment last?"
+                    "text": "How long will it last?"
                 },
                 "options": [
                     {
