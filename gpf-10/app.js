@@ -238,7 +238,7 @@ exports.lambdaHandler = async (event) => {
                 "placeholder": {
                     "type": "plain_text",
                     "emoji": true,
-                    "text": "Manage"
+                    "text": "Pick a metric of success..."
                 },
                 "options": [
                     {
