@@ -27,7 +27,7 @@ exports.lambdaHandler = async (event) => {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": ":microscope: Build a new self-improvement experiment!"
+                "text": ":microscope: Build a new self-improvement <https://theready.com/cards|experiment>!"
             }
         },
         {
@@ -81,7 +81,7 @@ exports.lambdaHandler = async (event) => {
                 "text": "*<fakeLink.toYourApp.com|Practice>*\nWhat do you propose we try?"
             },
             "accessory": {
-                "type": "static_select",
+                "type": "multi_static_select",
                 "placeholder": {
                     "type": "plain_text",
                     "emoji": true,
@@ -92,25 +92,81 @@ exports.lambdaHandler = async (event) => {
                         "text": {
                             "type": "plain_text",
                             "emoji": true,
-                            "text": "Manage it"
+                            "text": "Craft a clear and compelling purpose for the organization"
                         },
-                        "value": "value-0"
+                        "value": "value-01"
                     },
                     {
                         "text": {
                             "type": "plain_text",
                             "emoji": true,
-                            "text": "Read it"
+                            "text": "Craft a clear and compelling purpose for every team and every role"
                         },
-                        "value": "value-1"
+                        "value": "value-02"
                     },
                     {
                         "text": {
                             "type": "plain_text",
                             "emoji": true,
-                            "text": "Save it"
+                            "text": "Ask teams to share their essential intent for the next 6 to 24 months"
                         },
-                        "value": "value-2"
+                        "value": "value-03"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Clarify the metrics that matter and use them to steer"
+                        },
+                        "value": "value-04"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Clarify the metrics that matter and use them to steer"
+                        },
+                        "value": "value-05"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Recognize and celebrate noble failure"
+                        },
+                        "value": "value-06"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Replace \"Is it perfect?\" with \"Is it safe to try?\""
+                        },
+                        "value": "value-07"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Give everyone the freedom to choose where, when and how they work"
+                        },
+                        "value": "value-08"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Clarify the decision rights held by teams and roles"
+                        },
+                        "value": "value-09"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "emoji": true,
+                            "text": "Use a _waterline_ to create guardrails around team and individual autonomy"
+                        },
+                        "value": "value-10"
                     }
                 ]
             }
