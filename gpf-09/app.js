@@ -250,12 +250,12 @@ exports.lambdaHandler = async (event) => {
             ]
         }
     ]
-    const body = {
+    const responseBody = {
       replace_original: true,
       text: "Done ranking experiments.",
       blocks: blocks
     };
     
-    let response = await axios.post(event.response_url, body);
+    let response = await axios.post(event.response_url, responseBody);
     return response.status;
 };
