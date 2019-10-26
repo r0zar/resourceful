@@ -274,7 +274,7 @@ exports.lambdaHandler = async (event) => {
                         "text": "Launch"
                     },
                     "style": "primary",
-                    "value": "click_me_123"
+                    "value": "launch"
                 },
                 {
                     "type": "button",
@@ -283,7 +283,7 @@ exports.lambdaHandler = async (event) => {
                         "emoji": true,
                         "text": "Cancel"
                     },
-                    "value": "click_me_123"
+                    "value": "cancel"
                 }
             ]
         }
