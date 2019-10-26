@@ -198,7 +198,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "1 Week"
                         },
-                        "value": "value-0"
+                        "value": "week-1"
                     },
                     {
                         "text": {
@@ -206,7 +206,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "2 Weeks"
                         },
-                        "value": "value-1"
+                        "value": "week-2"
                     },
                     {
                         "text": {
@@ -214,7 +214,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "3 Weeks"
                         },
-                        "value": "value-2"
+                        "value": "week-3"
                     },
                     {
                         "text": {
@@ -222,7 +222,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "4 Weeks"
                         },
-                        "value": "value-3"
+                        "value": "week-4"
                     }
                 ]
             }
