@@ -16,7 +16,7 @@ exports.lambdaHandler = async (event, context) => {
 
 	const body = {
 		trigger_id: event.trigger_id,
-		response_action: "update",
+		view_id: event.view.id,
 		view: {
 			"type": "modal",
 			"callback_id": "modal-2",
@@ -104,7 +104,7 @@ exports.lambdaHandler = async (event, context) => {
 		}
 	};
 
-	let response = await axios.post('https://slack.com/api/views.open', body, {headers: {"Authorization" : `Bearer ${process.env.SLACK_API_KEY}`}});
+	let response = await axios.post('https://slack.com/api/views.update', body, {headers: {"Authorization" : `Bearer ${process.env.SLACK_API_KEY}`}});
 	return response.status;
 	
 };
