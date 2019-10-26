@@ -251,12 +251,13 @@ exports.lambdaHandler = async (event) => {
             ]
         }
     ]
+
     const responseBody = {
       replace_original: true,
       text: "Create a new experiment!",
       blocks: blocks
     };
     
-    let response = await axios.post(event.response_url, responseBody);
+    let response = await axios.post(payload.response_url, responseBody);
     return response.status;
 };
