@@ -252,7 +252,7 @@ exports.lambdaHandler = async (event) => {
     ]
     const responseBody = {
       replace_original: true,
-      text: "Done ranking experiments.",
+      text: "Create a new experiment!",
       blocks: blocks
     };
     
