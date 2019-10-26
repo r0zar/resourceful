@@ -14,38 +14,104 @@ const axios = require('axios');
  */
 exports.lambdaHandler = async (event, context) => {
 
-
-	const responseBody = {
-		"trigger_id": event.trigger_id,
-		"view": {
+	const body = {
+		trigger_id: event.trigger_id,
+		view: {
 			"type": "modal",
-			"callback_id": "modal-identifier",
 			"title": {
 				"type": "plain_text",
-				"text": "Just a modal"
+				"text": "My App",
+				"emoji": true
+			},
+			"submit": {
+				"type": "plain_text",
+				"text": "Submit",
+				"emoji": true
+			},
+			"close": {
+				"type": "plain_text",
+				"text": "Cancel",
+				"emoji": true
 			},
 			"blocks": [
 				{
-					"type": "section",
-					"block_id": "section-identifier",
-					"text": {
-						"type": "mrkdwn",
-						"text": "*Welcome* to ~my~ Block Kit _modal_!"
-					},
-					"accessory": {
-						"type": "button",
-						"text": {
+					"type": "input",
+					"element": {
+						"type": "plain_text_input",
+						"action_id": "title",
+						"placeholder": {
 							"type": "plain_text",
-							"text": "Just a button",
-						},
-						"action_id": "button-identifier",
+							"text": "What do you want to ask of the world?"
+						}
+					},
+					"label": {
+						"type": "plain_text",
+						"text": "Title"
 					}
+				},
+				{
+					"type": "input",
+					"element": {
+						"type": "multi_channels_select",
+						"action_id": "channels",
+						"placeholder": {
+							"type": "plain_text",
+							"text": "Where should the poll be sent?"
+						}
+					},
+					"label": {
+						"type": "plain_text",
+						"text": "Channel(s)"
+					}
+				},
+				{
+					"type": "input",
+					"element": {
+						"type": "plain_text_input",
+						"action_id": "option_1",
+						"placeholder": {
+							"type": "plain_text",
+							"text": "First option"
+						}
+					},
+					"label": {
+						"type": "plain_text",
+						"text": "Option 1"
+					}
+				},
+				{
+					"type": "input",
+					"element": {
+						"type": "plain_text_input",
+						"action_id": "option_2",
+						"placeholder": {
+							"type": "plain_text",
+							"text": "How many options do they need, really?"
+						}
+					},
+					"label": {
+						"type": "plain_text",
+						"text": "Option 2"
+					}
+				},
+				{
+					"type": "actions",
+					"elements": [
+						{
+							"type": "button",
+							"action_id": "add_option",
+							"text": {
+								"type": "plain_text",
+								"text": "Add another option  "
+							}
+						}
+					]
 				}
-			],
+			]
 		}
 	};
-	
-	let response = await axios.post(event.response_url, responseBody);
+
+	let response = await axios.post('https://slack.com/api/views.open', body, {headers: {"Authorization" : `Bearer ${process.env.SLACK_API_KEY}`}});
 	return response.status;
 	
 };
