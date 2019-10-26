@@ -14,14 +14,6 @@ const axios = require('axios');
  */
 exports.lambdaHandler = async (event) => {
 
-    let body = event['body'];
-    let payload = {};
-    
-    body.split('&').forEach(param => {
-      let p = param.split('=');
-      payload[p[0]] = decodeURIComponent(p[1]).split('+').join(' ');
-    });
-
     const blocks = [
         {
             "type": "section",
@@ -303,6 +295,6 @@ exports.lambdaHandler = async (event) => {
       blocks: blocks
     };
     
-    let response = await axios.post(payload.response_url, responseBody);
+    let response = await axios.post(event.response_url, responseBody);
     return response.status;
 };
