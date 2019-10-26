@@ -45,7 +45,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Edit it"
                         },
-                        "value": "value-0"
+                        "value": "tension-01"
                     },
                     {
                         "text": {
@@ -53,7 +53,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Read it"
                         },
-                        "value": "value-1"
+                        "value": "tension-02"
                     },
                     {
                         "text": {
@@ -61,7 +61,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Save it"
                         },
-                        "value": "value-2"
+                        "value": "tension-03"
                     }
                 ]
             }
@@ -86,7 +86,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Craft a clear and compelling purpose for the organization"
                         },
-                        "value": "value-01"
+                        "value": "practice-01"
                     },
                     {
                         "text": {
@@ -94,7 +94,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Craft a clear and compelling purpose for every team and every role"
                         },
-                        "value": "value-02"
+                        "value": "practice-02"
                     },
                     {
                         "text": {
@@ -102,7 +102,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Ask teams to share their essential intent for the next 6 to 24 months"
                         },
-                        "value": "value-03"
+                        "value": "practice-03"
                     },
                     {
                         "text": {
@@ -110,7 +110,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Clarify the metrics that matter and use them to steer"
                         },
-                        "value": "value-04"
+                        "value": "practice-04"
                     },
                     {
                         "text": {
@@ -118,7 +118,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Clarify the metrics that matter and use them to steer"
                         },
-                        "value": "value-05"
+                        "value": "practice-05"
                     },
                     {
                         "text": {
@@ -126,7 +126,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Recognize and celebrate noble failure"
                         },
-                        "value": "value-06"
+                        "value": "practice-06"
                     },
                     {
                         "text": {
@@ -134,7 +134,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Replace \"Is it perfect?\" with \"Is it safe to try?\""
                         },
-                        "value": "value-07"
+                        "value": "practice-07"
                     },
                     {
                         "text": {
@@ -142,7 +142,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Give everyone the freedom to choose where, when and how they work"
                         },
-                        "value": "value-08"
+                        "value": "practice-08"
                     },
                     {
                         "text": {
@@ -150,7 +150,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Clarify the decision rights held by teams and roles"
                         },
-                        "value": "value-09"
+                        "value": "practice-09"
                     },
                     {
                         "text": {
@@ -158,7 +158,7 @@ exports.lambdaHandler = async (event) => {
                             "emoji": true,
                             "text": "Use a _waterline_ to create guardrails around team and individual autonomy"
                         },
-                        "value": "value-10"
+                        "value": "practice-10"
                     }
                 ]
             }
