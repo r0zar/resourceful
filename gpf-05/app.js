@@ -44,69 +44,12 @@ exports.lambdaHandler = async (event, context) => {
       },
       ReturnConsumedCapacity: 'TOTAL',
       ReturnValues: 'ALL_NEW',
-    }).promise()
+		}).promise()
+		
+
     
-    let randomExperiment = experiments[Math.floor(Math.random() * experiments.length)];
     
-    let blocks = [
-  		{
-  			"type": "section",
-  			"text": {
-  				"type": "mrkdwn",
-  				"text": `_${randomExperiment.experimentsId}_\n\n*Should we test ${randomExperiment.text}?*`
-  			}
-  		},
-  		{
-  			"type": "actions",
-  			"elements": [
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Downvote"
-  					},
-  					"style": "danger",
-  					"value": "downvote"
-  				},
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Skip"
-  					},
-  					"value": "skip"
-  				},
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Cancel"
-  					},
-  					"value": "cancel"
-  				},
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Upvote"
-  					},
-  					"style": "primary",
-  					"value": "upvote"
-  				}
-  			]
-  		}
-  	]
-    
-    let body = {
-        "response_type": "in_channel",
-        "replace_original": true,
-        "text": 'User test upvoted!',
-        "blocks": blocks
-      };
+    let body = {};
     
     return await axios.post(event.response_url, body).then(response => response.status);
     

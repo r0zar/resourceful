@@ -18,12 +18,12 @@ exports.lambdaHandler = async (event) => {
     let payload = decodeURIComponent(body).split('payload=')[1];
     console.log(payload);
     var params = {
-      stateMachineArn: 'arn:aws:states:us-east-2:990217436416:stateMachine:experiments-interactivity',
+      stateMachineArn: '<STEP_FUNCTION_ARN>', // UPDATE ME
       input: payload
     };
     let response = await new Promise((resolve, reject) => {
       stepfunctions.startExecution(params, (err, data) => {
-        if (err) reject(err, err.stack); // an error occurred
+        if (err) reject(err, err.stack);  // an error occurred
         else     resolve(data);           // successful response
       });
     });

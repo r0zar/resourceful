@@ -1,12 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  experiments - a digital space to try new things
+  tradyr-labmda - little functions doing big things
   
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 5
+    Timeout: 6
 
 # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 Resources:
@@ -99,73 +99,45 @@ Resources:
       CodeUri: gpf-12/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
-
-Outputs:
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-
-  GPFunction00:
-    Description: "GPFunction00 Lambda Function ARN"
-    Value: !GetAtt GPFunction00.Arn
-  GPFunction00IamRole:
-    Description: "Implicit IAM Role created for GPFunction00"
-    Value: !GetAtt GPFunction00Role.Arn
-  GPFunction01:
-    Description: "GPFunction01 Lambda Function ARN"
-    Value: !GetAtt GPFunction01.Arn
-  GPFunction01IamRole:
-    Description: "Implicit IAM Role created for GPFunction01"
-    Value: !GetAtt GPFunction01Role.Arn
-  GPFunction02:
-    Description: "GPFunction02 Lambda Function ARN"
-    Value: !GetAtt GPFunction02.Arn
-  GPFunction02IamRole:
-    Description: "Implicit IAM Role created for GPFunction02"
-    Value: !GetAtt GPFunction02Role.Arn
-  GPFunction03:
-    Description: "GPFunction03 Lambda Function ARN"
-    Value: !GetAtt GPFunction03.Arn
-  GPFunction03IamRole:
-    Description: "Implicit IAM Role created for GPFunction03"
-    Value: !GetAtt GPFunction03Role.Arn
-  GPFunction04:
-    Description: "GPFunction04 Lambda Function ARN"
-    Value: !GetAtt GPFunction04.Arn
-  GPFunction04IamRole:
-    Description: "Implicit IAM Role created for GPFunction04"
-    Value: !GetAtt GPFunction04Role.Arn
-  GPFunction05:
-    Description: "GPFunction05 Lambda Function ARN"
-    Value: !GetAtt GPFunction05.Arn
-  GPFunction05IamRole:
-    Description: "Implicit IAM Role created for GPFunction05"
-    Value: !GetAtt GPFunction05Role.Arn
-  GPFunction06:
-    Description: "GPFunction06 Lambda Function ARN"
-    Value: !GetAtt GPFunction06.Arn
-  GPFunction06IamRole:
-    Description: "Implicit IAM Role created for GPFunction06"
-    Value: !GetAtt GPFunction06Role.Arn
-  GPFunction07:
-    Description: "GPFunction07 Lambda Function ARN"
-    Value: !GetAtt GPFunction07.Arn
-  GPFunction07IamRole:
-    Description: "Implicit IAM Role created for GPFunction07"
-    Value: !GetAtt GPFunction07Role.Arn
-  GPFunction08:
-    Description: "GPFunction08 Lambda Function ARN"
-    Value: !GetAtt GPFunction08.Arn
-  GPFunction08IamRole:
-    Description: "Implicit IAM Role created for GPFunction08"
-    Value: !GetAtt GPFunction08Role.Arn
-  GPFunction09:
-    Description: "GPFunction09 Lambda Function ARN"
-    Value: !GetAtt GPFunction09.Arn
-  GPFunction09IamRole:
-    Description: "Implicit IAM Role created for GPFunction09"
-    Value: !GetAtt GPFunction09Role.Arn
-  GPFunction10:
-    Description: "GPFunction10 Lambda Function ARN"
-    Value: !GetAtt GPFunction10.Arn
-  GPFunction10IamRole:
-    Description: "Implicit IAM Role created for GPFunction10"
-    Value: !GetAtt GPFunction10Role.Arn
+  GPFunction13:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-13/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction14:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-14/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction15:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-15/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction16:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-16/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction17:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-17/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction18:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-18/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+  GPFunction19:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: gpf-19/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x

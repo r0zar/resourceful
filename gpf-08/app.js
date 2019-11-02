@@ -14,10 +14,7 @@ const axios = require('axios');
  */
 exports.lambdaHandler = async (event, context) => {
 
-    const body = {
-        replace_original: true,
-        text: "Cancelled."
-    };
+    const body = {};
     
     let response = await axios.post(event.response_url, body);
     return response.status;

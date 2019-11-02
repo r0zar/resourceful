@@ -14,65 +14,8 @@ const axios = require('axios');
  */
 exports.lambdaHandler = async (event, context) => {
     
-    let blocks = [
-  		{
-  			"type": "section",
-  			"text": {
-  				"type": "mrkdwn",
-  				"text": `_${event.experiment.experimentsId}_\n\n*Should we test ${event.experiment.text}?*`
-  			}
-  		},
-  		{
-  			"type": "actions",
-  			"elements": [
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Downvote"
-  					},
-  					"style": "danger",
-  					"value": "downvote"
-  				},
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Skip"
-  					},
-  					"value": "skip"
-  				},
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Cancel"
-  					},
-  					"value": "cancel"
-  				},
-  				{
-  					"type": "button",
-  					"text": {
-  						"type": "plain_text",
-  						"emoji": true,
-  						"text": "Upvote"
-  					},
-  					"style": "primary",
-  					"value": "upvote"
-  				}
-  			]
-  		}
-  	]
+    let body = {};
     
-    let body = {
-        "response_type": "in_channel",
-        "text": 'User test ready for ranking!',
-        "blocks": blocks
-      };
-    
-    return await axios.post(event.event.response_url, body).then(response => response.status);
+    return await axios.post(event, body).then(response => response.status);
     
 };

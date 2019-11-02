@@ -23,12 +23,12 @@ exports.lambdaHandler = async (event) => {
     delete payload.token;
     console.log(JSON.stringify(payload));
     var params = {
-      stateMachineArn: 'arn:aws:states:us-east-2:990217436416:stateMachine:experiments-experiment',
+      stateMachineArn: '<STEP_FUNCTIONS_ARN>', // UPDATE ME
       input: JSON.stringify(payload)
     };
     await new Promise((resolve, reject) => {
       stepfunctions.startExecution(params, (err, data) => {
-        if (err) reject(err, err.stack); // an error occurred
+        if (err) reject(err, err.stack);  // an error occurred
         else     resolve(data);           // successful response
       });
     });

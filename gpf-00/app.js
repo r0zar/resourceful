@@ -23,7 +23,7 @@ exports.lambdaHandler = async (event) => {
     delete payload.token;
     console.log(JSON.stringify(payload));
     var params = {
-      stateMachineArn: 'arn:aws:states:us-east-2:990217436416:stateMachine:experiments-test',
+      stateMachineArn: '<STEP_MACHINE_ARN>', // UPDATE THIS
       input: JSON.stringify(payload)
     };
     await new Promise((resolve, reject) => {

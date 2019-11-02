@@ -1,10 +1,10 @@
-# experiments-lab
+# tradyr-lambda
 
-It's kinda like a suggestion box, but better.
+It's the duct tape of our project.
 
 ## Overview
 
-This is a sample template for yourself - Below is a brief explanation of what we have generated for you:
+Below is a brief explanation of the project structure:
 
 ```bash
 .
@@ -15,8 +15,6 @@ This is a sample template for yourself - Below is a brief explanation of what we
 │   └── tests                   <-- Unit tests
 │       └── unit
 │           └── test-handler.js
-├── gpf-dn-XX                   <-- Source code for a .NET lambda function
-├── gpf-py-XX                   <-- Source code for a Python lambda function
 ├── template.yaml               <-- SAM template
 ```
 
