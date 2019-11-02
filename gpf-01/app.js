@@ -13,5 +13,7 @@ const axios = require('axios');
  * 
  */
 exports.lambdaHandler = async (event, context) => {
+    console.log(JSON.stringify(event))
+
     return await Promise.resolve(200)
 };
