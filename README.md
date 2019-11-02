@@ -1,6 +1,6 @@
 # tradyr-lambda
 
-It's the duct tape of our project.
+It's the duct tape of our project!
 
 ## Overview
 
