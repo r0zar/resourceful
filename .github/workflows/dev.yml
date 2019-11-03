@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: r0zar/sam-deploy-action@v0.1-alpha
+    - uses: r0zar/sam-deploy-action@v0.2-alpha
       env:
         TEMPLATE: 'template.yaml'
-        AWS_STACK_NAME: dev-${GITHUB_REPOSITORY}
+        AWS_STACK_NAME: ${GITHUB_REPOSITORY}
         AWS_REGION: 'us-east-1'
         AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
         AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
