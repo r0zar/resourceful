@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: r0zar/sam-deploy-action@v0.12
+    - uses: r0zar/sam-deploy-action@v0.13
       env:
         TEMPLATE: 'template.yaml'
         AWS_STACK_NAME: ${GITHUB_REPOSITORY}
