@@ -11,8 +11,9 @@ jobs:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
-    - run:  for d in */ ; do cd $d && npm install --no-package-lock --loglevel=error && cd .. ; done
+        node-version: '10.x':  
+    - run: for d in */ ; do cd $d && npm install --no-package-lock --loglevel=error && cd .. ; done
+    - run: echo ${{github}}
     - uses: r0zar/sam-deploy-action@v0.22
       env:
         TEMPLATE: 'template.yaml'
