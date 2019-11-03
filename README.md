@@ -1,6 +1,6 @@
 # resourceful
 
-Be resourceful
+Little functions doing big things.
 
 ## Overview
 
@@ -9,18 +9,18 @@ Below is a brief explanation of the project structure:
 ```bash
 .
 ├── README.MD                   <-- This instructions file
-├── gpf-XX                      <-- Source code for a NodeJS lambda function
+├── <lambda-sub-folder>-XX      <-- Source code for a NodeJS lambda function
 │   └── app.js                  <-- Lambda function code
 │   └── package.json            <-- NodeJS dependencies and scripts
-│   └── tests                   <-- Unit tests
-│       └── unit
-│           └── test-handler.js
 ├── template.yaml               <-- SAM template
+├── .github                     <-- Github Actions
+│   └── workflows               <-- Workflows root directory
+│       └── <action>.yml        <-- Action defintion file
 ```
 
 ## Requirements
 
-* AWS CLI already configured with Administrator permission
+* AWS CLI configured with Administrator permission
 
 ## Setup process
 
@@ -45,7 +45,7 @@ Click on the AWS Toolkit Icon on the sidebar, then click the elipises symbol (..
 
 ### Using Github Actions
 
-Coming soon!
+Add your AWS credentials to Github secrets then configure Github workflows.
 
 ### Using command line tools
 
@@ -124,9 +124,8 @@ Here are a few things you can try to get more acquainted with building serverles
 
 ### Installing dependencies
 
-* Navigate to the root directory for the Lambda you need to add a dependency to
-* Install as needed for your language of choice
-* Build and deploy with SAM CLI or the VSCode extention plugin.
+* If using Github Actions, packages defined in `package.json` will be installed during deployment.
+* If using SAM CLI, AWS CLI or VSCode extention plugin, each lambda must have a `node_modules/` directory in its respective sub-folder.
 
 ### Step-through debugging
 

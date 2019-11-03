@@ -1,4 +1,5 @@
-const axios = require('axios');
+const AWS = require('aws-sdk');
+const stepfunctions = new AWS.StepFunctions();
 
 /**
  *
@@ -13,8 +14,18 @@ const axios = require('axios');
  * 
  */
 exports.lambdaHandler = async (event, context) => {
+    console.log(JSON.stringify(event))
+    let payload = {}
 
-	let response = await axios.post('https://slack.com/api/views.open', body, {headers: {"Authorization" : `Bearer ${process.env.SLACK_API_KEY}`}});
-	return response.status;
-	
+    var params = {
+      stateMachineArn: '<STEP_MACHINE_ARN>', // UPDATE THIS
+      input: JSON.stringify(payload)
+    };
+
+    return await new Promise((resolve, reject) => {
+      stepfunctions.startExecution(params, (err, data) => {
+        if (err) reject(err, err.stack);  // an error occurred
+        else     resolve(data);           // successful response
+      });
+    });
 };

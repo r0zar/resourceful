@@ -1,7 +1,5 @@
+const AWS = require('aws-sdk');
 const axios = require('axios');
-const AWS = require('aws-sdk'),
-    dynamoDb = new AWS.DynamoDB.DocumentClient(),
-    TABLE_NAME = process.env.TABLE_NAME
 
 /**
  *
@@ -16,23 +14,7 @@ const AWS = require('aws-sdk'),
  * 
  */
 exports.lambdaHandler = async (event, context) => {
-    
-    
-    let params = {
-        TableName: TABLE_NAME
-    }
-    let experiments = await dynamoDb.scan(params)
-    .promise()
-    .then(response => {
-        let experiments = response.Items
-        return experiments;
-    })
-    
-    
-    let randomExperiment = experiments[Math.floor(Math.random() * experiments.length)];
-    
-    let body = {};
-    
-    return await axios.post(event.response_url, body).then(response => response.status);
-    
+    console.log(JSON.stringify(event))
+
+    return await Promise.resolve(200)
 };

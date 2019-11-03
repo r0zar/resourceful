@@ -13,131 +13,31 @@ Resources:
 
   # NodeJS general purpose functions
 
-  GPFunction00:
+  ApiStepAdapter00:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: gpf-00/
+      CodeUri: api-sf-adapter-00/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
       Policies:
         - AWSStepFunctionsFullAccess
-  GPFunction01:
+      Events:
+        ApiEndpoint:
+          Type: Api
+          Properties:
+            Path: /v1
+            Method: post
+  SfDynamo00:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: gpf-01/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction02:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-02/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction03:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-03/
+      CodeUri: sf-dynamo-00/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
       Policies:
-        - AWSStepFunctionsFullAccess
-  GPFunction04:
+        - AmazonDynamoDBFullAccess
+  SfState00:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: gpf-04/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-      Policies:
-        - AWSStepFunctionsFullAccess
-  GPFunction05:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-05/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction06:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-06/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction07:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-07/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction08:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-08/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction09:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-09/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-      Policies:
-        - AWSStepFunctionsFullAccess
-  GPFunction10:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-10/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction11:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-11/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction12:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-12/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction13:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-13/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction14:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-14/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction15:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-15/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction16:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-16/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction17:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-17/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction18:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-18/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-  GPFunction19:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-19/
+      CodeUri: sf-state-00/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
