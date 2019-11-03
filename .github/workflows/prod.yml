@@ -13,11 +13,10 @@ jobs:
       with:
         node-version: '10.x'
     - run: for d in */ ; do cd $d && npm install --no-package-lock --loglevel=error && cd .. ; done
-    - run: echo `${{ github.repository }} | replace('/', '-')`
     - uses: r0zar/sam-deploy-action@v0.24
       env:
         TEMPLATE: 'template.yaml'
-        AWS_STACK_NAME: asd/a
+        AWS_STACK_NAME: prod-${{ github.actor }}
         AWS_REGION: 'us-east-1'
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
