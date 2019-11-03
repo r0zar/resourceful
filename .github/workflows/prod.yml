@@ -12,7 +12,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - uses: r0zar/sam-deploy-action@v0.21
+    - run:  for d in */ ; do cd $d && npm install --no-package-lock && cd .. done
+    - uses: r0zar/sam-deploy-action@v0.22
       env:
         TEMPLATE: 'template.yaml'
         AWS_STACK_NAME: ${GITHUB_REPOSITORY}
