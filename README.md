@@ -1,6 +1,6 @@
-# tradyr-lambda
+# resourceful
 
-It's the duct tape of our project!
+Be resourceful
 
 ## Overview
 
@@ -42,6 +42,10 @@ aws s3 mb s3://BUCKET_NAME
 ### Using the VSCode extention
 
 Click on the AWS Toolkit Icon on the sidebar, then click the elipises symbol (...) in the top right corner and click `Deploy SAM Application`.
+
+### Using Github Actions
+
+Coming soon!
 
 ### Using command line tools
 
