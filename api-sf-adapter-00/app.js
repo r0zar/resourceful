@@ -1,6 +1,5 @@
 const AWS = require('aws-sdk');
 const stepfunctions = new AWS.StepFunctions();
-const { IncomingForm } = require('formidable')
 
 /**
  *
@@ -16,34 +15,19 @@ const { IncomingForm } = require('formidable')
  */
 exports.lambdaHandler = async (event, context) => {
 
-  var form = new IncomingForm()
+  console.log(JSON.stringify(event))
+  let payload = {}
 
-  const stepFunction;
+  var params = {
+    stateMachineArn: '<STEP_FUNCTION_ARN>',
+    input: JSON.stringify(payload)
+  };
 
-  form.on('file', (field, file) => {
-
-    console.log(JSON.stringify(event))
-    let payload = {}
-  
-    var params = {
-      stateMachineArn: 'arn:aws:states:us-east-1:144504656881:stateMachine:file-upload',
-      input: JSON.stringify(payload)
-    };
-  
-    stepFunction = await new Promise((resolve, reject) => {
-      stepfunctions.startExecution(params, (err, data) => {
-        if (err) reject(err, err.stack);  // an error occurred
-        else     resolve(data);           // successful response
-      });
+  return await new Promise((resolve, reject) => {
+    stepfunctions.startExecution(params, (err, data) => {
+      if (err) reject(err, err.stack);  // an error occurred
+      else     resolve(data);           // successful response
     });
+  });
     
-  })
-
-  form.on('end', () => {
-    console.log('upload finished')
-  })
-
-  form.parse(event)
-
-  return stepFunction;
 };
