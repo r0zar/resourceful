@@ -41,7 +41,7 @@ Resources:
   #     CodeUri: sf-state-00/
   #     Handler: app.lambdaHandler
   #     Runtime: nodejs10.x
-  S3Upload00:
+  uploader:
     Type: AWS::Serverless::Application
     Properties:
       Location:
