@@ -13,34 +13,34 @@ Resources:
 
   # NodeJS general purpose functions
 
-  # ApiStepAdapter00:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     CodeUri: api-sf-adapter-00/
-  #     Handler: app.lambdaHandler
-  #     Runtime: nodejs10.x
-  #     Policies:
-  #       - AWSStepFunctionsFullAccess
-  #     Events:
-  #       ApiEndpoint:
-  #         Type: Api
-  #         Properties:
-  #           Path: /v1
-  #           Method: post
-  # SfDynamo00:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     CodeUri: sf-dynamo-00/
-  #     Handler: app.lambdaHandler
-  #     Runtime: nodejs10.x
-  #     Policies:
-  #       - AmazonDynamoDBFullAccess
-  # SfState00:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     CodeUri: sf-state-00/
-  #     Handler: app.lambdaHandler
-  #     Runtime: nodejs10.x
+  ApiStepAdapter00:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: api-sf-adapter-00/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Policies:
+        - AWSStepFunctionsFullAccess
+      Events:
+        ApiEndpoint:
+          Type: Api
+          Properties:
+            Path: /v1
+            Method: post
+  SfDynamo00:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: sf-dynamo-00/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Policies:
+        - AmazonDynamoDBFullAccess
+  SfState00:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: sf-state-00/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
   S3Upload00:
     Type: AWS::Serverless::Application
     Properties:
