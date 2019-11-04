@@ -47,4 +47,6 @@ Resources:
       Location:
         ApplicationId: arn:aws:serverlessrepo:us-east-1:233054207705:applications/uploader
         SemanticVersion: 1.0.3
+      Parameters: 
+        destBucket: tradyr-file-storage-dev
       
