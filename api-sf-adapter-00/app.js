@@ -18,7 +18,7 @@ exports.lambdaHandler = async (event, context) => {
     let payload = {}
 
     var params = {
-      stateMachineArn: '<STEP_MACHINE_ARN>', // UPDATE THIS
+      stateMachineArn: 'arn:aws:states:us-east-1:144504656881:stateMachine:file-upload',
       input: JSON.stringify(payload)
     };
 
