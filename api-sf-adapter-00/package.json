@@ -6,6 +6,7 @@
   "author": "Ross Ragsdale",
   "license": "MIT",
   "dependencies": {
+    "formidable": "^1.2.1"
   },
   "scripts": {
     "test": "mocha tests/unit/"
