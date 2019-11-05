@@ -11,7 +11,14 @@ Globals:
 # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 Resources:
 
-  # NodeJS general purpose functions
+  RestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowOrigin: "'*'"
+        AllowMethods: "'OPTIONS,HEAD,GET,PUT,POST'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
 
   ApiSfAdapter00:
     Type: AWS::Serverless::Function
@@ -27,6 +34,8 @@ Resources:
           Properties:
             Path: /v1
             Method: post
+            RestApiId:
+              Ref: RestApi
 
   DynamoDb00:
     Type: AWS::Serverless::Function
@@ -43,8 +52,6 @@ Resources:
       CodeUri: gpf-00/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
-
-  # Severless Application Repository functions
 
   S3Upload00:
     Type: AWS::Serverless::Application
