@@ -27,6 +27,7 @@ Resources:
           Properties:
             Path: /v1
             Method: post
+
   SfDynamo00:
     Type: AWS::Serverless::Function
     Properties:
@@ -35,12 +36,16 @@ Resources:
       Runtime: nodejs10.x
       Policies:
         - AmazonDynamoDBFullAccess
-  SfState00:
+
+  GpFunction00:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: sf-state-00/
+      CodeUri: gpf-00/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
+
+  # Severless Application Repository functions
+
   S3Upload00:
     Type: AWS::Serverless::Application
     Properties:
