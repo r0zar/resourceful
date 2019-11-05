@@ -63,12 +63,4 @@ Resources:
         SemanticVersion: 1.0.3
       Parameters: 
         destBucket: tradyr-file-storage-dev
-      Events:
-        ApiEndpoint:
-          Type: Api
-          Properties:
-            Path: /api/upload
-            Method: post
-            RestApiId:
-              Ref: RestApi
       
