@@ -13,7 +13,7 @@ Resources:
 
   # NodeJS general purpose functions
 
-  ApiStepAdapter00:
+  ApiSfAdapter00:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: api-sf-adapter-00/
