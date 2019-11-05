@@ -11,43 +11,43 @@ Globals:
 # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 Resources:
 
-  RestApi:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: dev
+  # RestApi:
+  #   Type: AWS::Serverless::Api
+  #   Properties:
+  #     StageName: dev
 
-  ApiSfAdapter00:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: api-sf-adapter-00/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-      Policies:
-        - AWSStepFunctionsFullAccess
-      Events:
-        ApiEndpoint:
-          Type: Api
-          Properties:
-            Path: /api/data
-            Method: post
-            RestApiId:
-              Ref: RestApi
+  # ApiSfAdapter00:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     CodeUri: api-sf-adapter-00/
+  #     Handler: app.lambdaHandler
+  #     Runtime: nodejs10.x
+  #     Policies:
+  #       - AWSStepFunctionsFullAccess
+  #     Events:
+  #       ApiEndpoint:
+  #         Type: Api
+  #         Properties:
+  #           Path: /api/data
+  #           Method: post
+  #           RestApiId:
+  #             Ref: RestApi
 
-  DynamoDb00:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: dynamodb-00/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
-      Policies:
-        - AmazonDynamoDBFullAccess
+  # DynamoDb00:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     CodeUri: dynamodb-00/
+  #     Handler: app.lambdaHandler
+  #     Runtime: nodejs10.x
+  #     Policies:
+  #       - AmazonDynamoDBFullAccess
 
-  GpFunction00:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: gpf-00/
-      Handler: app.lambdaHandler
-      Runtime: nodejs10.x
+  # GpFunction00:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     CodeUri: gpf-00/
+  #     Handler: app.lambdaHandler
+  #     Runtime: nodejs10.x
 
   S3Uploader00:
     Type: AWS::Serverless::Application
@@ -64,7 +64,7 @@ Resources:
         SemanticVersion: 1.0.0
       Parameters: 
         InBucketName: prod-r0zar-resourceful-serverlesss3uploa-s3bucket-xmjryj8yinyo
-        OutBucketName: tickets-blurred-barcode
+        OutBucketName: tickets-blurred-barcodes
       
         
       
