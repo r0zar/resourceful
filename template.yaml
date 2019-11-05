@@ -7,6 +7,12 @@ Description: >
 Globals:
   Function:
     Timeout: 6
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
+      AllowCredentials: "'*'"
 
 # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 Resources:
@@ -14,11 +20,7 @@ Resources:
   RestApi:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: prod
-      Cors:
-        AllowOrigin: "'*'"
-        AllowMethods: "'OPTIONS,HEAD,GET,PUT,POST'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+      StageName: dev
 
   ApiSfAdapter00:
     Type: AWS::Serverless::Function
@@ -32,7 +34,7 @@ Resources:
         ApiEndpoint:
           Type: Api
           Properties:
-            Path: /v1
+            Path: /api/data
             Method: post
             RestApiId:
               Ref: RestApi
@@ -61,4 +63,12 @@ Resources:
         SemanticVersion: 1.0.3
       Parameters: 
         destBucket: tradyr-file-storage-dev
+      Events:
+        ApiEndpoint:
+          Type: Api
+          Properties:
+            Path: /api/upload
+            Method: post
+            RestApiId:
+              Ref: RestApi
       
