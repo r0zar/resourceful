@@ -64,7 +64,7 @@ Resources:
         SemanticVersion: 1.0.0
       Parameters: 
         InBucketName: prod-r0zar-resourceful-serverlesss3uploa-s3bucket-xmjryj8yinyo
-        OutBucketName: tickets-blurred-barcodes
+        OutBucketName: tickets-blurred-barcode
       
         
       
