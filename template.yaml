@@ -28,10 +28,10 @@ Resources:
             Path: /v1
             Method: post
 
-  SfDynamo00:
+  DynamoDb00:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: sf-dynamo-00/
+      CodeUri: dynamodb-00/
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
       Policies:
