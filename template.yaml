@@ -49,21 +49,23 @@ Resources:
       Handler: app.lambdaHandler
       Runtime: nodejs10.x
 
-  S3Upload00:
-    Type: AWS::Serverless::Application
-    Properties:
-      Location:
-        ApplicationId: arn:aws:serverlessrepo:us-east-1:233054207705:applications/uploader
-        SemanticVersion: 1.0.3
-      Parameters: 
-        destBucket: tradyr-file-storage-dev
-
-  ServerlessS3Uploader:
+  S3Uploader00:
     Type: AWS::Serverless::Application
     Properties:
       Location:
         ApplicationId: arn:aws:serverlessrepo:us-east-1:526237104669:applications/Serverless-S3-Uploader
         SemanticVersion: 1.0.0
+
+  S3RekogBlur00:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location:
+        ApplicationId: arn:aws:serverlessrepo:us-east-1:932998628582:applications/blur-faces-rekognition
+        SemanticVersion: 1.0.0
+      Parameters: 
+        InBucketName: prod-r0zar-resourceful-serverlesss3uploa-s3bucket-xmjryj8yinyo
+        OutBucketName: tickets-blurred-barcodes
+      
         
       
       
